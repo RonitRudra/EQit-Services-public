@@ -1,0 +1,16 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class="continer-fluid">
+    <h1>Partner Login Page</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Login</button>
+    </form>
+    <p><a href={% url 'accounts:password_reset' %}>Forgot Password?</a></p>
+    <p>New Partner? Sign Up <a href={% url 'accounts:signup-provider' %}>Here</a></p>
+    <p>Are You a User? Login <a href={% url 'accounts:login-user' %}> Here</a></p>
+</div>
+{% endblock %}
+

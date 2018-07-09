@@ -1,0 +1,24 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<!--<div class="container">
+	<p>Username: {{username}}</p>
+	<p>Email: {{email}}</p>
+	<p>First Name: {{first_name}}</p>
+	<p>Last Name: {{last_name}}</p>
+-->
+<div class='container'>
+    <img src="{{ user.userprofile.profile_picture.url }}" style="width:240px; height:240px; border-radius:50%" >
+	<p>First Name: {{user.userprofile.first_name}}</p>
+    <p>Middle Name: {{user.userprofile.middle_name}}</p>
+	<p>Last Name: {{user.userprofile.last_name}}</p>
+	<p>Email Address: {{user.email}}</p>
+    <p>Date of Birth: {{user.userprofile.dob}}</p>
+    <p>City: {{user.userprofile.city}}</p>
+    <p>Phone: {{user.userprofile.phone}}</p>
+    <p>Zipcode: {{user.userprofile.zipcode}}</p>
+    <p>Description: {{user.userprofile.description}}</p>
+    <p><a href={% url 'accounts:profile_edit' %} type="button" class="btn btn-info">Edit</a></p>
+    <p><a href={% url 'accounts:interests' %} type="button" class="btn btn-info">Edit Interests</a></p>
+</div>
+{% endblock %}

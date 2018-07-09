@@ -1,0 +1,37 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class="continer-fluid">
+    <p>Edit Page</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-info">Save Changes</button>
+    </form>
+    <p><a href={% url 'accounts:change_password' %} type="button" class="btn btn-info">Change Password</a></p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    var getLocation = function () {
+        var autocomplete = new google.maps.places.Autocomplete(location_input);
+    }
+</script>
+
+<script>
+    var location_input = document.getElementById('id_address1');
+    location_input.addEventListener('input', getLocation, true);
+</script>
+
+<script>
+    function generateKeySrc() {
+        var s = document.createElement('script');
+        var src = "https://maps.googleapis.com/maps/api/js?key=" + "{{google_api_key }}" + "&libraries=places&callback=getLocation";
+        s.setAttribute('src', src);
+        document.body.appendChild(s);
+    }
+    generateKeySrc();
+</script>
+{% endblock %}

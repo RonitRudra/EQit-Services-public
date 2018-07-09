@@ -1,0 +1,56 @@
+{% extends 'accounts/header.html' %}
+{% block body %}
+<div class="container-fluid"></div>
+<h1><strong>{{gig.title}}</strong></h1>
+<h2>Date:<i>{{gig.date_posted}}</i></h2>
+<h2>Posted By:{{gig.poster.email}}</h2>
+<h3>Description:</h3><p>{{gig.description}}</p>
+<!-- ad hoc address -->
+<p id="gig_address" hidden>{{gig.giglocation.address1}},{{gig.giglocation.city}},{{gig.giglocation.zipcode}}</p>
+<h4>Address:</h4>
+<p>{{gig.giglocation.address1}},</p>
+<p>{{gig.giglocation.address2}},</p>
+<p>{{gig.giglocation.city}} {{gig.giglocation.zipcode}}</p>
+<h4>Point of Contact:</h4>
+<p>{{gig.giglocation.contact_first_name}} {{gig.giglocation.contact_last_name}}</p>
+<p>P: {{gig.giglocation.contact_phone}}</p>
+
+<div id="googleMap" style="width:25%;height:400px;"></div>
+{% endblock %}
+
+{% block scripts%}
+<script>
+    function myMap() {
+        var map = new google.maps.Map(document.getElementById("googleMap"), {
+            zoom: 16,
+            center: { lat: 41.881832, lng: -87.623177 }
+        });
+        var geocoder = new google.maps.Geocoder();
+        geocodeAddress(geocoder, map);
+    }
+
+    function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('gig_address').innerHTML;
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status === 'OK') {
+                resultsMap.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: resultsMap,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+</script>
+<script>
+    function generateKeySrc() {
+        var s = document.createElement('script');
+        var src = "https://maps.googleapis.com/maps/api/js?key=" + "{{google_api_key }}" + "&callback=myMap";
+        s.setAttribute('src', src);
+        document.body.appendChild(s);
+    }
+    generateKeySrc();
+</script>
+{% endblock %}

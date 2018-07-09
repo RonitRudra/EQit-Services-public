@@ -1,0 +1,17 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class="continer-fluid">
+    <h1>Gig {{gig_id}}</h1>
+    <h2>Pending Checkins</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="gig_id" id="id_gig_id" value={{gig_id}} />
+        <ol>
+            {% for user in users_checkin %}
+            <li> {{user.email}} <input type="checkbox" name="{{user.email}}" id="id_{{user.email}}" value="{{user.id}}" /></li>
+            {% endfor %}
+        </ol>
+        <button class="btn btn-success" type="submit">Approve Request</button>
+    </form>
+    {% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'accounts/header.html '%}
+
+{% block body %}
+<h1>Global Feed</h1>
+<ul>
+    {% for message in object_list %}
+    <div class="well well-sm">
+        <li>{{ message.date_posted }} - {{ message.body}}</li>
+    </div>
+    {% empty %}
+    <li>No articles yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

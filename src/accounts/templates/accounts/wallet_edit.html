@@ -1,0 +1,12 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class='container panel panel-info'>
+    <h1>EDIT YOUR WALLET ADDRESS</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-info">SUBMIT</button>
+    </form>
+</div>
+{% endblock %}

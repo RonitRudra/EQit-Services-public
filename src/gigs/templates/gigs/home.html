@@ -1,0 +1,9 @@
+{% extends 'accounts/header.html'%}
+{% block body %}
+<h1>Gigs Home</h1>
+<p><a href={% url 'gigs:browse' %} type="button" class="btn btn-info">Browse Gigs</a></p>
+<p><a href={% url 'gigs:view-activity' %} type="button" class="btn btn-info">View my Activity</a></p>
+{% if user.is_provider %}
+<p><a href={% url 'gigs:new-gig' %} type="button" class="btn btn-info">Create a New Gig</a></p>
+{% endif %}
+{% endblock %}

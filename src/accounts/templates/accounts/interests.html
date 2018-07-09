@@ -1,0 +1,12 @@
+﻿{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class="continer-fluid">
+    <p>Edit Interests</p>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-info">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

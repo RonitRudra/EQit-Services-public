@@ -1,0 +1,9 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class='container panel panel-info'>
+    <h1>{{user}}'s Wallet</h1>
+    <p><strong>ETH ADDRESS:</strong> {{wallet.eth_address}} <a href="{% url 'accounts:wallet-edit' %}" class="btn btn-info">EDIT</a></p>
+    <p><strong>BALANCE:</strong> {{wallet.balance}}</p>
+</div>
+{% endblock %}

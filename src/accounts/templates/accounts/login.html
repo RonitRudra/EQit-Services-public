@@ -1,0 +1,9 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class="continer-fluid">
+    <p>Are You a User? Login<a href={% url 'accounts:login-user' %} name="user-login"> Here</a></p>
+    <p>Are You a Partner? Login<a href={% url 'accounts:login-provider' %} name="provider-login"> Here</a></p>
+</div>
+{% endblock %}
+

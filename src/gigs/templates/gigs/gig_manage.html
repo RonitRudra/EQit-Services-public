@@ -1,0 +1,10 @@
+{% extends 'accounts/header.html'%}
+{% block body %}
+
+<h1>Gig {{gig.id}} Management</h1>
+
+<p><a href="{% url 'gigs:manage-approval' gig.id %}" type="button" class="btn btn-info">Approval Requests</a></p>
+<p><a href="{% url 'gigs:manage-checkin' gig.id %}" type="button" class="btn btn-info">Checkin Requests</a></p>
+<p><a href="{% url 'gigs:manage-payment' gig.id %}" type="button" class="btn btn-info">Payment Requests</a></p>
+
+{% endblock %}

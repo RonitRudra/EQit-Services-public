@@ -1,0 +1,82 @@
+{% extends 'accounts/header.html' %}
+
+{% block body %}
+<div class="continer-fluid">
+    {% if user.is_provider %}
+    <div class="panel panel-info">
+        <h1><strong>My Posted Gigs:</strong></h1>
+        <ol>
+            {% for gig in my_gigs %}
+            <li><a href="{% url 'gigs:detail' gig.id %}">{{ gig }}</a> <a href="{% url 'gigs:manage' gig.id %}" class="btn btn-info">Manage</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="panel panel-info">
+        <h1><strong>People Who Liked My Gigs:</strong></h1>
+        <ol>
+            {% for gig in liked_gigs %}
+            <li>{{ gig }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="panel panel-info">
+        <h1><strong>Gigs Pending Approval:</strong></h1>
+        <ol>
+            {% for gig in gigs_pending_checkin %}
+            <li>{{ gig }}</li>
+            {% endfor %}
+        </ol>
+    </div>
+    {% else %}
+    <div class="panel panel-info">
+        <h1><strong>Gigs I Have Liked:</strong></h1>
+        <ol>
+            {% for gig in liked_gigs %}
+            <li><a href="{% url 'gigs:detail' gig.id %}">{{ gig }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="panel panel-info">
+        <h1><strong>Gigs that Have Been Approved:</strong></h1>
+        <ol>
+            {% for gig in approved_gigs %}
+            <li><a href="{% url 'gigs:detail' gig.id %}">{{ gig }}</a></li>
+            <a href="{% url 'gigs:go' gig.id %}">Go!!</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="panel panel-info">
+        <h1><strong>Gigs Pending Checkin:</strong></h1>
+        <ol>
+            {% for gig in checkin_pending_gigs %}
+            <li><a href="{% url 'gigs:detail' gig.id %}">{{ gig }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="panel panel-info">
+        <h1><strong>Gigs Where I have Checked In:</strong></h1>
+        <ol>
+            {% for gig in checkin_approved_gigs %}
+            <li><a href="{% url 'gigs:detail' gig.id %}">{{ gig }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="panel panel-info">
+        <h1><strong>Gigs I Have Completed:</strong></h1>
+        <ol>
+            {% for gig in completed_gigs %}
+            <li><a href="{% url 'gigs:detail' gig.id %}">{{ gig }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="panel panel-info">
+        <h1><strong>Gigs I Have Been Paid For:</strong></h1>
+        <ol>
+            {% for gig in paid_gigs %}
+            <li><a href="{% url 'gigs:detail' gig.id %}">{{ gig }}</a></li>
+            {% endfor %}
+        </ol>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

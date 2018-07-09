@@ -1,0 +1,14 @@
+{% extends 'accounts/header.html'%}
+
+{% block body %}
+<div class="container-fluid"></div>
+<h1>Sentbox</h1>
+<ol>
+    {% for message in message_list %}
+    <div class="panel panel-default">
+        <li> {{ message.date_sent }} TO: <a href="{% url 'postal:detail' message.id %}">{{ message.receiver }}</a></li>
+    </div>
+    {% endfor %}
+</ol>
+</div>
+{% endblock %}

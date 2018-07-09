@@ -1,0 +1,12 @@
+{% extends 'accounts/header.html' %}
+{% block body %}
+    {% if messages %}
+    {% for message in messages %}
+<div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+<h1>Messages Home</h1>
+<p><a href={% url 'postal:new-message' %} type="button" class="btn btn-info">New Message</a></p>
+<p><a href={% url 'postal:inbox' %} type="button" class="btn btn-info">Inbox</a></p>
+<p><a href={% url 'postal:sentbox' %} type="button" class="btn btn-info">Sentbox</a></p>
+{% endblock %}

@@ -1,0 +1,70 @@
+﻿{% extends 'accounts/header.html'%}
+
+{% block body %}
+<h1>Browse Gigs</h1>
+<div class="panel panel-info">
+{% for gig in gigs %}
+    <p><strong>TITLE:</strong><a href="{% url 'gigs:detail' gig.id %}">{{gig.title|upper}}</a></p>
+    <p><strong>POSTED BY:</strong> {{gig.poster|upper}}</p>
+    <p><strong>DATE POSTED:</strong> {{gig.date_posted}}</p>
+    <p><strong>DESCRIPTION:</strong> {{gig.description}}</p>
+    <p><strong>TAGS:</strong></p>
+        {% for k,v in gigtype.items %}
+            {% if v == True %}
+    <p class="panel panel-success">{{k}}</p>
+            {% endif%}
+        {% endfor %}
+    {% endfor %}
+</div>
+<div class="pagination well well-sm">
+    <span class="step-links">
+        {% if gigs.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ gigs.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ gigs.number }} of {{ gigs.paginator.num_pages }}.
+        </span>
+
+        {% if gigs.has_next %}
+        <a href="?page={{ gigs.next_page_number }}">next</a>
+        <a href="?page={{ gigs.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% if not flag %}
+<div class="row-fliud">
+    <div class="col-xs-1">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="gig_id" value={{id}} />
+            <input type="hidden" name="flag" value={{True}} />
+            <button class="btn btn-success" type="submit">Like</button>
+        </form>
+    </div>
+    <div class="col-xs-1">
+        <form method="post">
+            {% csrf_token %}
+            <input type="hidden" name="gig_id" value={{id}} />
+            <input type="hidden" name="flag" value={{False}} />
+            <button class="btn btn-danger" type="submit">Dislike</button>
+        </form>
+    </div>
+</div>
+{% else %}
+<div class="row-fliud">
+    <div class="col-xs-1">
+        <form method="post">
+            <button class="btn btn-success" type="submit" disabled>Like</button>
+        </form>
+    </div>
+    <div class="col-xs-1">
+        <form method="post">
+            <button class="btn btn-danger" type="submit" disabled>Dislike</button>
+        </form>
+    </div>
+</div>
+{% endif%}
+
+{% endblock %}

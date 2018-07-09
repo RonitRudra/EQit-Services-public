@@ -1,0 +1,9 @@
+{% extends 'accounts/header.html' %}
+{% block body %}
+<div class="container-fluid"></div>
+    <h1> From: {{message.sender}}</h1>
+    <h1> To: {{message.receiver}}</h1>
+    <h2> Date: {{message.date_sent}}</h2>
+    <h3> Content: {{message.body}}</h3>
+    </div>
+{% endblock %}
